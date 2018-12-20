@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>TodoList for vue</title>
+  <style id="jsbin-css">
+    li.active{
+      text-decoration: line-through;
+    }
+  </style>
+   <script src="https://unpkg.com/vue"></script>
+</head>
+
+<body>
+  <div id="app">
+    
+    <input type="text" placeholder="請輸入代辦事項" @keyup.enter="addTodo(newTodo)" v-model="newTodo">
+    <h2>事項列表</h2>
+    <button id="completedAll" @click="completedAll">全部完成</button>
+    <button  @click="completedClear">全部取消</button>
+    <p>
+    <button @click='showAll'>全部顯示</button>
+    <button @click='showComplete'>顯示已完成</button>
+    <button @click='showUndone'>顯示未完成</button>
+    <ul>
+    
+        <li v-for="todo in todos"  v-if="show == 1"  v-bind:class="{ active: todo.completed }">
+            <input  type="checkbox" v-model="todo.completed">
+            {{todo.content}}
+            - <a href="#" @click.prevent="removeTodo(todo)">刪除</a>
+        </li>
+        
+        <li v-for="todo in todos"  v-if="show == 2 && todo.completed"  v-bind:class="{ active: todo.completed }">
+            <input  type="checkbox" v-model="todo.completed">
+            {{todo.content}}
+            - <a href="#" @click.prevent="removeTodo(todo)">刪除</a>
+        </li>
+        
+        <li v-for="todo in todos"  v-if="show == 3 && !todo.completed"  v-bind:class="{ active: todo.completed }">
+            <input  type="checkbox" v-model="todo.completed">
+            {{todo.content}}
+            - <a href="#" @click.prevent="removeTodo(todo)">刪除</a>
+        </li>
+        
+      </ul>
+  
+
+</div>
+  
+ 
+<script src="./lib.js"></script>
+</body>
+</html>
